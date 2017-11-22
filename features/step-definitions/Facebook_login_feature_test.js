@@ -3,7 +3,7 @@ var webdriverio = require('webdriverio');
 const expect = require('chai').expect;
 var options = {
     desiredCapabilities: {
-        browserName: 'chrome'
+        browserName: 'firefox'
     }
 };
 module.exports=function(){
@@ -16,33 +16,31 @@ module.exports=function(){
     //    browser.click('a[href^="https://www.facebook.com/"]')
 //});
     this.When(/^user click on facebook logo in the blue bar$/,function(){
-        //browser.click('//*[@href="https://www.facebook.com/"]');
-        browser.click('i.fb_logo.img.sp_ex0C8BIsLat.sx_7401de');
+        browser.click('//*[@href="https://www.facebook.com/"]');
         
     });
     this.Then(/^user is redirected to facebook login and sign up page$/, function(){
-        var text = browser.getText('._5iyx');
+        var text = browser.getText('//*[@class="_5iyx"]');
         expect(text).to.equal('Facebook giúp bạn kết nối và chia sẻ với mọi người trong cuộc sống của bạn.');
     //Scenario: Verify sign up button    
     });
     this.When(/^user click on sign up button$/, function(){
-        browser.click('._42ft._4jy0.signup_btn._4jy4._4jy2.selected._51sy');
+        browser.click('//*[@class="_42ft _4jy0 signup_btn _4jy4 _4jy2 selected _51sy"]');
         browser.pause(3000);
     });
     this.Then(/^user is redirected to Sign up for Facebook page$/, function(){
-        var text = browser.getText('.mbs._52lq.fsl.fwb.fcb');
+        var text = browser.getText('//*[@class="mbs _52lq fsl fwb fcb"]');
         expect(text).to.equal('Tạo tài khoản mới')
     });
     //Scenario: Verify login successfully
-    this.When(/^user enter ([^"]*) in email field$/, function(text){
-        browser.setValue('#email',text);
+    this.When(/^user input "([^"]*)" in email field$/,function(text){
+        browser.setValue('#email', text);
     });
-    this.When(/^user enter ([^"]*) in password field$/, function(text){
-        browser.setValue('#pass',text);
-        browser.pause(2000);
+    this.When(/^user input "([^"]*)" in password field$/, function(text){
+        browser.setValue('#pass', text);
     });
     this.When(/^user click on login button$/, function(){
-        browser.click('#loginbutton');
+        browser.click('//*[@id="loginbutton"]');
         browser.pause(4000);
     });
     this.Then(/^user login successfully$/, function(){
@@ -50,14 +48,21 @@ module.exports=function(){
         expect(title).to.equal('Facebook');
         browser.pause(3000);
         
-    browser.click('.hasLeftCol._2yq.home.composerExpanded._5vb_.fbx._-kb._2ltu._605a._61s0.a_1cz3on-39m.chrome.webkit.win.x1.Locale_vi_VN.cores-gte4.hasAXNavMenubar');
+    browser.click('//*[@class="hasLeftCol _2yq home composerExpanded _5vb_ fbx _-kb _2ltu _605a _61s0 a_1cz3on-39m chrome webkit win x1 Locale_vi_VN cores-gte4 hasAXNavMenubar"]');
     browser.pause(3000);
     browser.click('#userNavigationLabel');
     browser.pause(3000);
-    browser.click('._54ni.navSubmenu._6398._64kz.__MenuItem');
+    browser.click('//*[@class="_54ni navSubmenu _6398 _64kz __MenuItem"]');
 
     });
     //Scenario Outline: Verify login function unsuccessfully
+    this.When(/^user enter invalid ([^"]*) in email field$/, function(text){
+        browser.setValue('#email',text);
+    });
+    this.When(/^user enter ([^"]*) in password field$/, function(text){
+        browser.setValue('#pass',text);
+        browser.pause(2000);
+    });
     this.Then(/^user see ([^"]*)$/, function(error){
         console.log(error);
         expect(browser.getText('div._4rbf._53ij')).to.equal(error)
@@ -67,7 +72,7 @@ module.exports=function(){
         browser.click('#forgot-password-link');
     });
     this.Then(/^user is redirected to Forgotten Password screen$/, function(){
-        var text = browser.getText('.uiHeaderTitle');
+        var text = browser.getText('//*[@class="uiHeaderTitle"]');
         expect(text).to.equal('Tìm tài khoản của bạn')
     });
     //Scenario: Verify Sign up for Facebook hyperlink
@@ -75,7 +80,7 @@ module.exports=function(){
         browser.click('#reg-link');
     });
     //Scenario: Verify login function when inputting nothing
-    this.When(/^user enter "([^"]*)" in email field$/, function(text){
+    this.When(/^user enter invalid "([^"]*)" in email field$/, function(text){
         browser.setValue('#email',text);
     });
     this.When(/^user enter "([^"]*)" in password field$/, function(text){
@@ -83,7 +88,8 @@ module.exports=function(){
         browser.pause(2000);
     });
     this.When(/^user see button "Khôi phục tài khoản của bạn"$/, function(){
-        var text = browser.getText('._42ft._4jy0._62c3._4jy4._517h._51sy');
+        var text = browser.getText('//*[@class="_42ft _4jy0 _62c3 _4jy4 _517h _51sy"]');
         expect(text).to.equal('Khôi phục tài khoản của bạn')
     });
 }
+
