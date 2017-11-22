@@ -27,7 +27,7 @@ Feature: Facebook login page
     Then user login successfully
 
   Scenario Outline: Verify login function unsuccessfully
-    When user enter invalid <email> in email field
+    When user enter <email> in email field
     And user enter <password> in password field
     And user click on login button
     Then user see <message>
@@ -42,7 +42,7 @@ Feature: Facebook login page
       | ah536843fhi!@#@gmail.com    |           | Email hoặc số điện thoại bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản. |
       | abc123@.com                 | 123qwe!@# | Email hoặc số điện thoại bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản. |
       | 0169912880235               | 56555     | Email hoặc số điện thoại bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản. | 
-  @watch
+  
   Scenario: Verify login function when inputting nothing
   When user input "" in email field
   And user input "" in password field
