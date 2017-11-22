@@ -19,17 +19,7 @@ Feature: Facebook login page
   Scenario: Verify Sign up for Facebook hyperlink
     When user click on Sign up for Facebook hyperlink
     Then user is redirected to Sign up for Facebook page
-  @watch
-  Scenario Outline: Verify login successfully
-    When user enter <email> in email field
-    And user enter <password> in password field
-    And user click on login button
-    Then user login successfully
-
-    Examples:
-      | email                       | password	|
-      | han.minhnc@gmail.com        | Han1234do |
-
+  
   Scenario Outline: Verify login function unsuccessfully
     When user enter <email> in email field
     And user enter <password> in password field
@@ -43,10 +33,19 @@ Feature: Facebook login page
       | 0983439700                  |           | Mật khẩu bạn đã nhập không chính xác. Quên mật khẩu? |
       | 0983439700                  | hihi      | Mật khẩu bạn đã nhập không chính xác. Quên mật khẩu? |
       | emailkhongton.tai@gmail.com |           | Email bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản.|
-      | ah536843fhi!@#@gmail.com    |           | Email hoặc số điện thoại bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản. |
       | abc123@.com                 | 123qwe!@# | Email hoặc số điện thoại bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản. |
       | 0169912880235               | 56555     | Email hoặc số điện thoại bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản. | 
-  
+
+  Scenario Outline: Verify login successfully
+    When user enter <email> in email field
+    And user enter <password> in password field
+    And user click on login button
+    Then user login successfully
+
+    Examples:
+      | email                       | password	|
+      | han.minhnc@gmail.com        | Han1234do |    
+  @watch
   Scenario: Verify login function when inputting nothing
   When user input "" in email field
   And user input "" in password field

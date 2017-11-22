@@ -70,10 +70,10 @@ module.exports=function(){
         browser.click('#reg-link');
     });
     //Scenario: Verify login function when inputting nothing
-    this.When(/^user enter "([^"]*)" in email field$/, function(text){
+    this.When(/^user input "([^"]*)" in email field$/, function(text){
         browser.setValue('#email',text);
     });
-    this.When(/^user enter "([^"]*)" in password field$/, function(text){
+    this.When(/^user input "([^"]*)" in password field$/, function(text){
         browser.setValue('#pass',text);
         browser.pause(2000);
     });
