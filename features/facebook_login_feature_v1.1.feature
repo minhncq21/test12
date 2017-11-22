@@ -19,12 +19,16 @@ Feature: Facebook login page
   Scenario: Verify Sign up for Facebook hyperlink
     When user click on Sign up for Facebook hyperlink
     Then user is redirected to Sign up for Facebook page
-  
-  Scenario: Verify login successfully
-    When user input "han.minhnc@gmail.com" in email field
-    And user input "Han1234do" in password field
+  @watch
+  Scenario Outline: Verify login successfully
+    When user enter <email> in email field
+    And user enter <password> in password field
     And user click on login button
     Then user login successfully
+
+    Examples:
+      | email                       | password	|
+      | han.minhnc@gmail.com        | Han1234do |
 
   Scenario Outline: Verify login function unsuccessfully
     When user enter <email> in email field

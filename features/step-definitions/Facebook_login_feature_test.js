@@ -34,11 +34,12 @@ module.exports=function(){
         expect(text).to.equal('Tạo tài khoản mới')
     });
     //Scenario: Verify login successfully
-    this.When(/^user input "([^"]*)" in email field$/,function(text){
-        browser.setValue('#email', text);
+    this.When(/^user enter ([^"]*) in email field$/, function(text){
+        browser.setValue('#email',text);
     });
-    this.When(/^user input "([^"]*)" in password field$/, function(text){
-        browser.setValue('#pass', text);
+    this.When(/^user enter ([^"]*) in password field$/, function(text){
+        browser.setValue('#pass',text);
+        browser.pause(2000);
     });
     this.When(/^user click on login button$/, function(){
         browser.click('#loginbutton');
@@ -57,13 +58,6 @@ module.exports=function(){
 
     });
     //Scenario Outline: Verify login function unsuccessfully
-    this.When(/^user enter ([^"]*) in email field$/, function(text){
-        browser.setValue('#email',text);
-    });
-    this.When(/^user enter ([^"]*) in password field$/, function(text){
-        browser.setValue('#pass',text);
-        browser.pause(2000);
-    });
     this.Then(/^user see ([^"]*)$/, function(error){
         console.log(error);
         expect(browser.getText('div._4rbf._53ij')).to.equal(error)
