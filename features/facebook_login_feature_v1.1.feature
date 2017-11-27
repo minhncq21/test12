@@ -21,10 +21,10 @@ Feature: Facebook login page
     Then user is redirected to Sign up for Facebook page
   
   Scenario Outline: Verify login function unsuccessfully
-    When user enter <email> in email field
-    And user enter <password> in password field
+    When user enter "<email>" in email field
+    And user enter "<password>" in password field
     And user click on login button
-    Then user see <message>
+    Then user see "<message>"
 
     Examples:
       | email                       | password	| message |
@@ -35,10 +35,10 @@ Feature: Facebook login page
       | emailkhongton.tai@gmail.com |           | Email bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản.|
       | abc123@.com                 | 123qwe!@# | Email hoặc số điện thoại bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản. |
       | 0169912880235               | 56555     | Email hoặc số điện thoại bạn đã nhập không khớp với bất kỳ tài khoản nào. Đăng ký tài khoản. | 
-
+  @watch
   Scenario Outline: Verify login successfully
-    When user enter <email> in email field
-    And user enter <password> in password field
+    When user enter "<email>" in email field
+    And user enter "<password>" in password field
     And user click on login button
     Then user login successfully
 
@@ -47,7 +47,7 @@ Feature: Facebook login page
       | han.minhnc@gmail.com        | Han1234do |    
   @watch
   Scenario: Verify login function when inputting nothing
-  When user input "" in email field
-  And user input "" in password field
+  When user enter "" in email field
+  And user enter "" in password field
   And user click on login button
   Then user see button "Khôi phục tài khoản của bạn"
