@@ -1,23 +1,24 @@
 const expect = require('chai').expect;
 
 module.exports=function(){
+    //Background
 this.Given(/^user logged into Connect with contractee role$/,function(){
     browser.url('http://192.168.86.117:3000/login')
-    browser.pause(2000);
-    browser.setValue('#session_mcdp_id','NLU01035');
+    browser.setValue('#session_mcdp_id','ITR00018');
     browser.click('//input[@type="submit"]')
-    browser.pause(4000);
+    
 });
 this.When(/^user clicks on "(.*)" in left menu$/, function(text){
+    browser.pause(1000);
     browser.click('i.menu-icon-btn');
-    browser.pause(2000);
     browser.click('//*[text()="募集案件を登録"]');
-    browser.pause(2000);
+    
 });
 this.Then(/^user should see "(.*)" page with list recruitment is created$/, function(text){
     var text = browser.getText('.page-title');
     expect(text).to.equal('募集案件管理');
 });
+//Scenario: Verify “create recruitment" button on recruitment list page
 this.When(/^user should see button "(.*)" is orange$/, function(text){
     var text = browser.getText('.btn-standard-1.cub-btn');
     expect(text).to.equal('新規案件を追加');
@@ -38,31 +39,55 @@ this.When(/^user should see table with information such as: title, status, paper
 });
 this.When(/^user clicks on "(.*)" button$/, function(text){
     browser.click('.menu-icon-btn');
-    //browser.click('//*[text()="新規案件を追加"]');
-    browser.click('.btn-standard-1');
-    browser.pause(2000);
+    browser.click('.btn-standard-1.cub-btn');
 });
 this.Then(/^user should see "(.*)" page for creating an recruitment$/, function(text){
     var title = browser.getText('.page-title');
     expect(title).to.equal('募集案件の登録');
-    browser.pause(2000);
 });
-/*this.When(/^user should see order columns following: title, description, recruitment end date, prefecture, city, started at date, ended at date, company job type, contract hierarchy, budget, number of worker, Payment conditions, method$/, function(){
+//Scenario: Verify “create recruitment” button on recruitment page with require fields
+// this.When(/^user inputs title for recruitment$/, function(){
+//      browser.setValue('.title .md-input', 'this is title');
+// });
+// this.When(/^user inputs description for recruitment$/, function(){
+//      browser.setValue('.description textarea', 'this is description');
+// });
+this.When(/^user inputs "(.*)" in (title|description) field$/, function (text, field) {
+    switch (field){
+      case "title":
+      browser.setValue('.title .md-input',text);
+        break;
+      case "description":
+      browser.setValue('.description textarea',text);
+        break;
+    }
+  });
 
-    //var title = browser.getText('//*[text()="タイトル"]');
-    //expect(title).to.equal('タイトル');
-    var content = browser.getText('.header-1');
-    console.log(content);
-    expect (content).to.equal(['タイトル 必須',
-    '詳細',
-    '募集終了日 必須',
-    '依頼予定期日 必須',
-    '工事場所 必須',
-    '工事期間 必須',
-    '工事内容 必須',
-    '発注者の次数 必須',
-    '金額情報 必須',
-    '必要な人数規模',
-    '支払条件・方法']);
-});*/
+this.When(/^user selects "(.*)" in (recruitment end|adoption|start|end) date$/, function(text, field){
+    switch (field){
+        case "recruitment end":
+        browser.setValue('.input-1.js-datetimepicker-expire-date',text);
+            break;
+        case "adoption":
+        browser.setValue('.input-1.js-datetimepicker-adoption-date',text);
+            break;
+        case "start":
+        browser.setValue('.input-1.js-datetimepicker-started', text);
+            break;
+        case "end":
+        browser.setValue('.input-1.js-datetimepicker-ended', text);
+            break;
+      }
+      browser.click('.title .md-input');
+    });
+this.When(/^user selects "(.*)" in working area$/, function(text){
+    browser.pause(200);
+    browser.click('.prefecture .md-select-value');
+    browser.elements('.md-menu-content .md-list').click(".md-list-item*=" + text);
+});
+this.When(/^user selects "(.*)" for contact hierarchy$/, function(text){
+    browser.elements('.contract-hierarchy .pc-radio ').click(".md-radio*=" + text);
+    //var abbbbbbbbbbbb = browser.getText('#contract-hierarchy-3');
+    //console.log(abbbbbbbbbbbb);
+});
 }
