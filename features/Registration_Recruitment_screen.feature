@@ -23,4 +23,7 @@ Background:
  And user selects "東京都" in working area
  And user selects "2017.12.10" in start date
  And user selects "2017.12.20" in end date
- And user selects "三次以下" for contact hierarchy
+ And user selects "三次以下" for contract hierarchy
+ And user selects "予算入力" for budget type
+ And user selects "請負額" for contract type
+ And user selects "500000" for budget amount

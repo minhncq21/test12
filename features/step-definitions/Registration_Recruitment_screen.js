@@ -83,11 +83,22 @@ this.When(/^user selects "(.*)" in (recruitment end|adoption|start|end) date$/, 
 this.When(/^user selects "(.*)" in working area$/, function(text){
     browser.pause(200);
     browser.click('.prefecture .md-select-value');
-    browser.elements('.md-menu-content .md-list').click(".md-list-item*=" + text);
+    browser.elements('.md-menu-content .md-list').click(".md-list-item=" + text);
 });
-this.When(/^user selects "(.*)" for contact hierarchy$/, function(text){
-    browser.elements('.contract-hierarchy .pc-radio ').click(".md-radio*=" + text);
-    //var abbbbbbbbbbbb = browser.getText('#contract-hierarchy-3');
-    //console.log(abbbbbbbbbbbb);
+this.When(/^user selects "(.*)" for contract hierarchy$/, function(text){
+    browser.elements('.contract-hierarchy .pc-radio ').click(".md-radio=" + text);
 });
-}
+this.When(/^user selects "(.*)" for (budget type|contract type|budget amount)$/, function(text, field){
+    switch (field){
+        case "budget type":
+        browser.elements('.budget-strategy .pc-radio').click(".md-radio*=" + text);
+            break;
+        case "contract type":
+        browser.elements('.budget-strategy .pc-radio').click(".md-radio*=" + text);
+            break;
+        case "budget amount":
+        browser.elements('.budget-strategy .pc-radio').click(".md-radio*=" + text);
+            break;
+      }
+});
+}   
