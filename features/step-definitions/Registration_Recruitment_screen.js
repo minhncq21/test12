@@ -26,6 +26,7 @@ this.When(/^user should see button "(.*)" is orange$/, function(text){
 this.When(/^user should see table with information such as: title, status, paper-view, number of applicants, number of message, edit$/, function(){
     var title = browser.getText('//th[1]');
     expect(title).to.equal('タイトル');
+    //expect(browser.getText('//th[1]')).to.equal('タイトル');
     var tstatusext = browser.getText('//th[2]');
     expect(tstatusext).to.equal('ステータス');
     var paperview = browser.getText('//th[3]');
